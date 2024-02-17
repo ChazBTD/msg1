@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-
+import 'package:msg1/Splash.dart';
+import 'package:msg1/Button.dart';
 
 class Barcode extends StatelessWidget{
 
@@ -20,25 +21,40 @@ class Barcode extends StatelessWidget{
   @override
   Widget build (BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: EdgeInsets.all(20.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            TextField(
-              controller: textController,
-              decoration: const InputDecoration(
-                  hintText: 'Number Code Here',
-                  border: OutlineInputBorder()
+      backgroundColor: Colors.grey[300],
+      body: SafeArea(
+        child: Center(
+          child: Column (
+            children: [
+              //input
+              SizedBox(height: 100),
+              TextField(
+                controller: textController,
+                decoration: const InputDecoration(
+                    hintText: 'Number Code Here',
+                    border: OutlineInputBorder()
+                ),
+                onSubmitted: (String text) {
+                  testBarcodeAPI(text);
+                },
               ),
-              onSubmitted: (String text) {
-                testBarcodeAPI(text);
-              },
-            ),
-          ], //
+
+              SizedBox(height: 50),
+              Button(
+                  onTap: () => SwitchPage(context),
+                  buttonName: 'To Home Screen'
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
-}
 
+  void SwitchPage(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => Splash()),
+    );
+  }
+}

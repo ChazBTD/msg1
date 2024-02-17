@@ -1,35 +1,38 @@
 import 'package:flutter/material.dart';
-import 'package:msg1/Welcome.dart';
+import 'package:msg1/Barcode.dart';
+import 'package:msg1/Button.dart';
 
 class Splash extends StatelessWidget {
 
   @override
   Widget build (BuildContext context) {
 
-    Future.delayed(
-        const Duration(seconds: 3),
-            (){ nextPage (context); }
-    );
-
     return Scaffold(
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(125),
-          child: Column(
+      body: SafeArea(
+        child: Center(
+          child: Column (
             children: [
+              //logo
+              SizedBox(height: 100),
               Image.asset('assets/Food Logo.png'),
+
+              //buttons
+              SizedBox(height: 50),
+              Button(
+                  onTap: () => SwitchPage(context),
+                  buttonName: 'To Barcode Scanner'
+              ),
             ],
           ),
-        )
+        ),
       ),
     );
   }
 
-  void nextPage(BuildContext context) {
-    Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(builder: (builder) => Welcome()),
-            (route) => false
+  void SwitchPage(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => Barcode()),
     );
   }
 }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:msg1/Barcode.dart';
 import 'package:msg1/Splash.dart';
 
 void main() {
